@@ -2,7 +2,7 @@
 <link rel="import" href="../materializecss-styles/materializecss-styles.html">
 <link rel="import" href="../hax-body-behaviors/hax-body-behaviors.html">
 <link rel="import" href="../schema-behaviors/schema-behaviors.html">
-<link rel="import" href="../iron-image/iron-image.html">
+
 <!--
 `parallax-image`
 A LRN element
@@ -23,75 +23,28 @@ A LRN element
         width: 100%;
       }
 
-      iron-image {
-        width: 100%;
-        --iron-image-width: 100%;
-      }
-
-      .call_to_action {
-        align-content: center;
-        background: rgba(0, 0, 0, 0.6);
-        width: 70%;
-        z-index: 1;
-        position: absolute;
-        padding: 40px;
-
-      }
-
-      .action {
-        color: #fff;
-        font-size: 28px;
-        display: flex;
-        justify-content: center;
-      }
-
-      .cta_wrap {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-      }
-
       #parallax_wrap {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        height: 400px;
+        overflow: hidden;
       }
 
-      @media screen and (max-width: 900px) {
-        .call_to_action {
-          max-width: 60%;
-          padding: 20px;
-        }
+      .parallax {
       }
 
-      @media screen and (max-width: 900px) {
-        .action {
-          font-size: 24px;
-        }
+      .parallax img {
+        width: 100%;
+        height: auto;
+        padding: 10px;
       }
 
-      @media screen and (max-width: 650px) {
-        .call_to_action {
-          max-width: 55%;
-          padding: 20px;
-        }
-      }
-
-      @media screen and (max-width: 650px) {
-        .action {
-          font-size: 16px;
-        }
-      }
-      
     </style>
+
     <div id="parallax_wrap">
-      <div class="call_to_action">
-        <div class="action">[[action]]</div>
+      <div class="parallax">
+        <img src="[[image]]">
       </div>
-      <iron-image src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Ferrari_488_GTB.jpg/1200px-Ferrari_488_GTB.jpg"></iron-image>
     </div>
-    </div>
-    <div class="cta_wrap">
+
   </template>
 
   <script>
@@ -100,12 +53,13 @@ A LRN element
       is: 'parallax-image',
       behaviors: [HAXBehaviors.PropertiesBehaviors, MaterializeCSSBehaviors.ColorBehaviors, SchemaBehaviors.Schema],
       properties: {
+
         /**
-         * Title
+         * Image
          */
-        action: {
+        image: {
           type: String,
-          value: 'Check This Cool Thing Out!',
+          value: '',
           reflectToAttribute: true,
         },
       },
