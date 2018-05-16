@@ -20,29 +20,44 @@ A LRN element
     <style>
       :host {
         display: block;
-        width: 100%;
+        /* --parallax-image-background: "https://i.ytimg.com/vi/hNUDYdM0FRs/maxresdefault.jpg"; */
+        --parallax-image-background: '';
+        perspective: 10px;
       }
 
-      #parallax_wrap {
+      .parallax_container {
         height: 400px;
+        width: 100%;
         overflow: hidden;
       }
 
       .parallax {
-      }
-
-      .parallax img {
+        background-attachment: fixed;
+        background-position: top center;
+        background-repeat: no-repeat;
+        background-size: cover;
         width: 100%;
-        height: auto;
-        padding: 10px;
+        height: 100%;
+        background-image: var(--parallax-image-background);
       }
 
+      h1 {
+        background: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        font-size: 2em;
+        display: block;
+        position: absolute;
+        padding: 40px;
+        text-align: center;
+        width: 70%;
+      }
     </style>
 
-    <div id="parallax_wrap">
-      <div class="parallax">
-        <img src="[[image]]">
+    <div class="parallax_container">
+      <div id="bgParallax" class="parallax">
+        <!-- <img src="[[imageBg]]"> -->
       </div>
+      <h1 id="titleParallax">Ford Motor Sports: 1993 Mustang Cobra</h1>
     </div>
 
   </template>
@@ -57,12 +72,16 @@ A LRN element
         /**
          * Image
          */
-        image: {
+        imageBg: {
           type: String,
           value: '',
           reflectToAttribute: true,
         },
       },
+
+      observers: [
+        '__updateStyles(imageBg)'
+      ],
       /**
        * Attached to the DOM, now fire.
        */
@@ -113,6 +132,23 @@ A LRN element
         };
         this.setHaxProperties(props);
       },
+
+      __updateStyles: function (imageBg) {
+        this.customStyle['--parallax-image-background'] = `url(${imageBg})`;
+        this.updateStyles();
+      },
+
+      ready: function () {
+        const bgParallax = this.$.bgParallax;
+        const titleParallax = this.$.titleParallax
+        window.addEventListener('scroll', (e) => {
+          const yParallaxPosition = window.scrollY * -.2;
+          const yParallaxPositionTitle = yParallaxPosition * 2;
+          bgParallax.style.backgroundPosition = `center ${yParallaxPosition}px`;
+          titleParallax.style.transform = `translate3D(0, ${yParallaxPositionTitle}px, 0)`;
+        });
+      },
+
     });
   </script>
 </dom-module>
