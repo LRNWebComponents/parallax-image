@@ -68,14 +68,15 @@ A LRN element
       }
     </style>
 
-    <div class="parallax_container">
-      <div id="bgParallax" class="parallax">
-        <div class="title" id="titleParallax">
-          <slot name="parallax_heading"></slot>
+    <a href="[[url]]" target$="[[_urlTarget(url)]]">
+      <div class="parallax_container">
+        <div id="bgParallax" class="parallax">
+          <div class="title" id="titleParallax">
+            <slot name="parallax_heading"></slot>
+          </div>
         </div>
       </div>
-
-    </div>
+    </a>
 
   </template>
 
@@ -98,11 +99,41 @@ A LRN element
           value: '',
           reflectToAttribute: true,
         },
+        /**
+         * Url
+         */
+        url: {
+          type: String,
+          value: '',
+          reflectToAttribute: true,
+        },
       },
 
       observers: [
         '__updateStyles(imageBg)'
       ],
+
+      _urlTarget: function (url) {
+        if (url) {
+          const external = this._outsideLink(url);
+          if (external) {
+            return "_blank";
+          }
+        }
+        return false;
+      },
+      /**
+       * Internal function to check if a url is external
+       */
+      _outsideLink: function (url) {
+        if (url.indexOf('http') != 0) return false;
+        var loc = location.href, path = location.pathname,
+          root = loc.substring(0, loc.indexOf(path));
+        return url.indexOf(root) != 0;
+      },
+
+
+
       /**
        * Attached to the DOM, now fire.
        */

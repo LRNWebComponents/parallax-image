@@ -24,10 +24,10 @@
 
 <body>
   <div class="vertical-section-container">
-    <h3>Basic parallax-image demo</h3>
+    <h3>Basic parallax-image demo (w/ external url)</h3>
     <demo-snippet>
       <template>
-        <parallax-image image-bg="https://27ml3ckbz243349t7nkxkpyo-wpengine.netdna-ssl.com/wp-content/uploads/2016/04/shark_guide_cover.jpeg">
+        <parallax-image image-bg="https://27ml3ckbz243349t7nkxkpyo-wpengine.netdna-ssl.com/wp-content/uploads/2016/04/shark_guide_cover.jpeg" url="https://www.google.com">
           <span slot="parallax_heading">Great White Shark</span>
         </parallax-image>
         <div class="text">The legendary great white shark is far more fearsome in our imaginations than in reality. As scientific research
@@ -42,7 +42,8 @@
           tails that can propel them through the water at speeds of up to 15 miles per hour. They can even leave the water
           completely, breaching like whales when attacking prey from underneath.
         </div>
-        <parallax-image image-bg="http://oceana.org/sites/default/files/styles/lightbox_full/public/tiger_shark_0.jpg?itok=g3wKSOYX">
+        <h3>Basic parallax-image demo (w/ internal url)</h3>
+        <parallax-image image-bg="http://oceana.org/sites/default/files/styles/lightbox_full/public/tiger_shark_0.jpg?itok=g3wKSOYX" url="/#">
           <span slot="parallax_heading">Tiger Shark</span>
         </parallax-image>
         <div class="text">Tiger sharks are named for the dark, vertical stripes found mainly on juveniles. As these sharks mature, the lines
