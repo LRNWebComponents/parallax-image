@@ -20,7 +20,7 @@ A LRN element
     <style>
       :host {
         display: block;
-        perspective: 10px;
+        /* perspective: 10px; */
         --parallax-image-background: '';
         --parallax-title-background: rgba(0, 0, 0, 0.4);
         --parallax-title-font: #fff;
@@ -45,16 +45,21 @@ A LRN element
         justify-content: center;
       }
 
+      #bgParallax {
+        display: flex;
+        align-items: center;
+      }
+      
       .title {
         background: var(--parallax-title-background);
         display: block;
-        position: absolute;
         padding: 30px;
         text-align: center;
         width: 60%;
-        bottom: 40px;
         color: var(--parallax-title-font);
         font-size: 2em;
+        position: absolute;
+        margin-top: 120px;
       }
 
       @media screen and (max-width: 900px) {
@@ -66,10 +71,11 @@ A LRN element
 
     <div class="parallax_container">
       <div id="bgParallax" class="parallax">
+        <div class="title" id="titleParallax">
+          <slot name="parallax_heading"></slot>
+        </div>
       </div>
-      <div class="title" id="titleParallax">
-        <slot name="parallax_heading"></slot>
-      </div>
+
     </div>
 
   </template>
@@ -78,7 +84,11 @@ A LRN element
     Polymer({
 
       is: 'parallax-image',
-      behaviors: [HAXBehaviors.PropertiesBehaviors, MaterializeCSSBehaviors.ColorBehaviors, SchemaBehaviors.Schema],
+      behaviors: [
+        HAXBehaviors.PropertiesBehaviors,
+        MaterializeCSSBehaviors.ColorBehaviors,
+        SchemaBehaviors.Schema
+      ],
       properties: {
 
         /**
